@@ -1,0 +1,30 @@
+html,body,header,nav,div{margin:0;padding: 0;}
+
+.nav a{text-decoration: none;color:#ffffff;}
+.nav{
+	width: 100%;
+	height: 40px;
+	display: -webkit-box;
+	background-color: #f61d4b
+}
+.nav div{
+	width: 20%;
+	text-align: center;
+	color:#ffffff;
+	line-height: 40px;
+	font-weight: 400;
+}
+
+
+.logo{
+	width:90px;
+	height:40px;
+	background: url(../imgs/logo.png) no-repeat;
+	background-size: contain;
+	background-position: center center;
+	text-indent: -9999px;
+}
+
+.cur{
+	background-color: #DA1740;
+}
