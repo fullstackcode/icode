@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sizes art</title>
+	<style>
+	body{text-align: center;margin: 0;padding: 0;}
+	picture{display: block;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		media="(min-width: 1280px)"
+		sizes="50vw"
+		srcset="image/200.png 200w,
+				image/400.png 400w,
+				image/800.png 800w,
+				image/1200.png 1200w">
+	<img
+		src="image/400.png" alt=""
+		sizes="(min-width: 640px) 60vw, 100vw"
+		srcset="image/200.png 200w,
+				image/400.png 400w,
+				image/800.png 800w,
+				image/1200.png 1200w">
+</picture>
+<h3>浏览器宽度大于等于1280px的时候，图片宽度为视窗宽度的百分之五十；浏览器宽度大于等于640px小于1279px的时候，图片宽度为视窗宽度的百分之六十，小于639px的时候，图片宽度为视窗宽度的百分之百。浏览器根据屏幕DPI和图片宽度选择合适的图片。</h3>
+</body>
+</html>

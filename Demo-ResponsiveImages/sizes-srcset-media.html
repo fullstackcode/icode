@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sizes dpi art</title>
+	<style>
+	body{text-align: center;margin: 0;padding: 0;}
+	picture{display: block;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		media="(min-width: 1280px)"
+		sizes="50vw"
+		srcset="opera-fullshot-200.jpg 200w,
+				opera-fullshot-400.jpg 400w,
+				opera-fullshot-800.jpg 800w,
+				opera-fullshot-1200.jpg 1200w">
+	<img
+		src="opera-closeup-400.jpg" alt="The Oslo Opera House"
+		sizes="(min-width: 640px) 60vw, 100vw"
+		srcset="opera-closeup-200.jpg 200w,
+				opera-closeup-400.jpg 400w,
+				opera-closeup-800.jpg 800w,
+				opera-closeup-1200.jpg 1200w">
+</picture>
+<h3>浏览器宽度大于等于640px的时候，图片宽度为视窗宽度的百分之六十；小于639的时候，图片宽度为视窗宽度的百分之百。浏览器根据屏幕DPI和图片宽度选择合适的图片。</h3>
+</body>
+</html>

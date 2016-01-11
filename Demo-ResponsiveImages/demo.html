@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Responsive Image Picture</title>
+	
+</head>
+<body>
+  
+<style>
+  picture{display: block;width: 100%;text-align: center;}
+</style>
+<picture>
+  <source media="(min-width: 650px)" srcset="image/kitten-large.png">
+  <source media="(min-width: 465px)" srcset="image/kitten-medium.png">
+  <img  src="image/kitten-small.png" alt="a cute kitten">
+</picture>
+
+<picture>
+	<source type="image/webp" srcset="image/kitten-large.webp">
+	<img src="image/kitten-large.png" alt="a butterfly">
+</picture>
+
+
+<picture>
+  <source 
+    media="(min-width:650px)"
+    srcset="image/kitten-large.png,
+            image/kitten-large@1.5x.png 1.5x,
+            image/kitten-large@2x.png 2x">
+  <source
+    media="(min-width:450px)"
+    srcset="image/kitten-medium.png,
+            image/kitten-medium@1.5x.png 1.5x,
+            image/kitten-medium@2x.png 2x">
+  <img
+    src="image/kitten-small.png"
+    srcset="image/kitten-small@1.5x.png 1.5x,
+            image/kitten-small@2x.png 2x"
+    alt="a cute kitten">
+</picture>
+
+<h2>Combine with width descriptors</h2> 
+<img src="image/kitten-small.png" alt="lighthouse"
+    sizes="80vw"
+      srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w"/>
+
+<picture>
+  <source media="(min-width: 800px)"
+          sizes="80vw"
+          srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+  <img src="kitten-small.png" alt="lighthouse"
+       sizes="80vw"
+       srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+</picture>
+fdsfsf
+<picture>
+  <source media="(min-width: 800px)"
+          sizes="100vw"
+          srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+  <img src="kitten-small.png" alt="lighthouse"
+       sizes="100vw"
+       srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+</picture>
+
+<picture>
+  <source media="(min-width: 800px)"
+          srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+  <img src="kitten-small.png" alt="lighthouse"
+       srcset="image/kitten-large.png 650w,
+               image/kitten-medium.png 465w,
+               image/kitten-small.png 330w">
+</picture>
+
+
+
+
+</body>
+</html>

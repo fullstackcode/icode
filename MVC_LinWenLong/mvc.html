@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>JS全端开发</title>
+		<meta name="description" content="介绍JS/NodeJS做全端开发">
+		<meta name="author" content="Lin WenLong">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>JS全端开发</h1>
+					<h3>前后端分离实践</h3>
+					<p>
+						<small>Created by <a href="http://weibo.com/leadwit" target="_blank">蔺文龙</a></small>
+					</p>
+                    <aside class="notes">
+                        自我介绍。<br>
+                        大家好，我叫蔺文龙，我来自浏览器研发部中间件研发组。<br>
+                        今天跟大家分享一些 JS全端开发以及前后端分离 方面的一些实践。<br><br>
+                        全端开发/全端工程师,这个词大概是从去年底才开始流行起来的。我做了非常多年的WEB开发，对，以前我都是告诉别人我是做WEB开发的，而不会说自己是做.NET开发，JAVA开发的。<br>
+                        什么叫WEB开发，其实就是做网站。我之前创业过好几年，04年最开始做了3，4年CMS，后来08年做电商B2C网站做淘宝，11年又做了APP和APP自助平台，其实都是在做WEB开发，做网站。<br><br>
+                        我觉得做网站的，就是全端开发。<br>
+                        因为在大多数WEB开发团队里，程序员们都难免前端、后端都要涉及到的，如果是自己创业那基本上就是一个人从头干到尾（我以前就是这么干的），从原型到数据库，从HTML到JAVA，或者从WEB到APP，其实这些都可以称为全端开发。<br>
+
+                        最近看到全端工程师这个词，觉得自己一下子，档次高了很多。所以今天就以这个为主题来聊一聊。
+                    </aside>
+				</section>
+
+
+                <section>
+                    <h2>分享内容</h2>
+                    <ul>
+                        <li class="fragment">聊聊全端开发和全端工程师的情怀</li>
+                        <li class="fragment">全端开发为什么要前后端分离？</li>
+                        <li class="fragment">全端开发怎样做前后端分离？</li>
+                        <li class="fragment">分离后每一层怎样处理？</li>
+                    </ul>
+                    <aside class="notes">
+                        跟大家分享下面这些内容。<br/>
+                        先聊聊这么有档次的全端开发，以及全端工程师的情怀。<br/>
+                        情怀现在也是一个热门的话题。<br/><br/>
+                        中间两节分享一些关于全端开发的现状及存在的一些问题<br/>
+                        最后分享一些我在这方面的一些实践。
+                    </aside>
+                </section>
+
+                <section data-background="#007777">
+                    <h2>小调查</h2>
+                    <aside class="notes">
+                        1 产品或设计同学，请举个手<br/>
+                        2 后端开发同学，请举个手<br/>
+                        3 剩下的应该全部是前端开发同学了吧？<br/><br/>
+
+                        4 前面两个、甚至三个工作都干的，请举个手。你们就是全端开发攻城狮啊！也就是现在很热门的 全栈（Full Stack）工程师<br/>
+                        其实曾经的很长时间里，我是这三项工作都做的。所以嘛，就成为了全端开发。
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>JS全端开发？</h2>
+                    <ul>
+                        <li class="fragment">我们用 JavaScript 写前端，用 Node.JS 写后端，甚至使用基于 JSON 的 NoSQL数据库;</li>
+                        <li class="fragment">这里没有前/后端的区隔, 没有沟通问题, 也没有扯皮</li>
+                        <li class="fragment">我们关注MVC、Cache、ORM、BigPiper、性能优化、架构设计、移动跨屏...</li>
+                        <li class="fragment">我们参与设计、后台开发、前端开发、移动开发、运营维护、PS、文案...</li>
+                    </ul>
+                    <aside class="notes">
+                        注意一点，我这里说的是JS全端开发，只是全端开发的一种。<br>
+                        比如说一个程序员可以做WEB网站开发，可以做手机APP开发，也可叫全端开发。<br><br>
+                        我们今天只说JS全端开发，更准确的说是，JS的WEB全端开发。
+                    </aside>
+                </section>
+                <section>
+                    <p>我们是高端、大气、上档次的</p>
+                    <h2><strong class="strong">全端工程师</strong></h2>
+                    <p style="font-size:0.7em;color:gray;">也叫全栈（Full Stack）工程师</p>
+
+                    <aside class="notes">
+                        传说，Facebook只招全端工程师Full Stack Engineer。<br>
+                        刚才举手的全端开发的同学，有没有一下子觉得自己很有前途。<br><br>
+                    </aside>
+                </section>
+                <section>
+                    <h2>看起来,很<strong class="strong">牛(ku)逼</strong>的样子！</h2>
+                </section>
+                <section>
+                    <h2>其实<strong class="strong">真相</strong>是这样的！</h2>
+                    <img src="img/2b.jpg">
+                </section>
+
+                <section>
+                    <h2>如何成为全端工程师？</h2>
+                    <ul>
+                        <li class="fragment">发现问题，洞察需求，设计解决方案，并开发出初始版本的产品</li>
+                        <li class="fragment">为了达到目标，愿意去学习任何领域的技能和知识</li>
+                        <li class="fragment">如：后端开发、前端开发、界面设计、产品设计、数据库、各种移动客户端、三屏兼容、restFul API设计、OAuth、SPA、Web Socket、HTML5/CSS3、微信公众号、微博应用等等...</li>
+                    </ul>
+                    <aside class="notes">
+                        成为全端工程师，说起来还蛮容易的，但又好像不是那么容易。<br>
+                        要学这么多的东西，掌握这么多的技能，这么苦逼，为什么要干这个呢？<br>
+                        说得有点虚是不是？？<br><br>
+
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>困惑？</h2>
+                    <img src="img/front-skill-tag-cloud-2.png">
+                    <aside class="notes">
+                        既然是全端开发，就一定涉及到非常非常多的技术。每一项都掌握得非常精，几乎是不可能的。
+                        而我们又面临大量的待处理需求，这里就存在一个矛盾。<br>
+                        如果你纠结于单一的技术，就会无暇应付日常工作。而在技术尝试方面的不足，又会让你内心觉得底气不足，毕竟是混技术圈的嘛。<br/>
+                        所以，作为全端工程师，要非常明确自己的职业规划，不要把精力放在纠结上。<br>
+                        对于全端工程师，最适合的技术知道结构还是T型知识结构（字母T），有一项自己比较精通的技术即可，广度一定要达到。<br>
+                        最重要的是要能独立完成产品初始版本，而在产品到了一定阶段后，你又可以去专注做自己比较擅长或喜欢的方面，也就是说首先要热爱产品。
+                        <br/>
+                    </aside>
+                </section>
+
+                <section>
+                    <h3 style="line-height:1.5em;">成为全端工程师不是为了工作本身，是为了方便实现自己的梦想。</h3>
+                </section>
+                <section>
+                    <h3 style="line-height:1.5em;"><strong class="strong">逼格</strong>不低啊！</h3>
+                    <img src="img/big.jpg">
+                    <aside class="notes">
+                        其实这是另外一种更好的心态。<br>
+                        逼格不低啊！有木有。<br>
+                        还可以更高逼格些
+                    </aside>
+                </section>
+                <section>
+                    全端工程师,更重要的责任
+                    <div style="font-size:1.5em; line-height:1em;">Design and building a team or a company which builds great products.</div>
+                    <aside class="notes">
+                        全端工程师,更重要的责任：设计和打造一个团队或公司，去创造伟大的产品。<br><br>
+                        为什么这样说？
+                        首先，从产品层面讲，全端工程师做为早期产品的核心开发人员甚至是唯一开发人员，最能想像产品未来的发展。<br>
+                        并且，能够从技术层面上思考产品的优缺点，清楚需要拥有什么样技术背景的人才加入。<br>
+                        推广这个产品时，也可以想像，需要什么样的人以及走什么样的渠道，去推广这个产品。
+                    </aside>
+                </section>
+                <section>
+                    其实，社会给了他们另一个称呼——<span style="font-size:2em; color:yellow; ">创业者</span>.
+                    <aside class="notes">
+                        对全端工程师就是创业者。<br>
+                        甚至有人说，全端工程师的唯一出路，就是创业。<br>
+                        因为可能在很多公司里，由于这个工作的性质，可能没有办法给全端工程师一个好的职业晋升空间。<br>
+                        或者换一种说法，由于全端工程师，较全面的掌握了一个产品的各个过程，所以更有可能也会想到去创业。<br><br>
+
+                        其实，创业不创业不是重点，而是全端工程师应该具有更广泛的视野，不仅关心技术，也关心产品、用户和用户体验，更加关心产品的商业目标。<br>
+                        所以，一个好的全端工程师是在任何场合都能发光发热，实现价值，我相信国内对全端工程师的需求会越来越多的，同时也会出现越来越多优秀的全端工程师。
+                    </aside>
+                </section>
+                <section>
+                    <img src="img/so-happy.png">
+                    <aside class="notes">
+                        会不会有点小激动？<br>
+
+                        好了，不扯了，进入今天的主题。
+                    </aside>
+                </section>
+
+
+
+
+                <!--  主题部分    ////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+                <section data-background="#007777">
+                    <h2>进入主题</h2>
+                </section>
+                <section class="present" style="top: -211.5px; display: block;">
+                    <h2>后端MVC时代</h2>
+                </section>
+                <section class="present" style="top: -211.5px; display: block;">
+                    <img class="w100" src="img/back-end-mvc.png">
+                    <aside class="notes">
+                        不知道多少人听说过.NET里的WebForm，所有的事件都是服务器端做的，甚至还发明了服务器端事件，把客户端的事件概念与服务器端整合起来。<br/>
+                        JAVA里也有类似的实现，好像是叫JSF。<br/>
+                        这些奇葩的东西，都是上个时代的产物。<br/>
+                    </aside>
+                </section>
+                <section class="present">
+                    <img class="w100" src="img/everything-in-mind.png">
+                    <aside class="notes">
+                        那时候前端是干嘛的呢？
+                    </aside>
+                </section>
+                <section class="present">
+                    <h2>前端？== 套页面</h2>
+                </section>
+                <section class="present">
+                    <h2>携手合作</h2>
+                </section>
+                <section class="present">
+                    <img class="w100" src="img/back-front-teamwork.png">
+
+                    <aside class="notes">
+                        相信很多团队，早已开始前后端携手合作了。<br/>
+                        有了一些自己的协作方式。<br/><br/>
+
+                        但仍然存在不少问题。<br/>
+                    </aside>
+                </section>
+
+
+                <section class="present">
+                    <h1>The Problems</h1>
+                </section>
+                <section class="present">
+                    <h3>前端代码越来越复杂</h3>
+                    <ul class="pull-down">
+                        <li>无法统一协作模式，代码充满了<strong class="strong">约定</strong></li>
+                        <li>JS跟CSS，依赖于<strong class="strong">后端产出</strong>的HTML</li>
+                        <li>有的数据来自AJAX，有的数据印在DOM上</li>
+                        <li>有的业务逻辑在前端，有的在Model层，更多的是在<strong class="strong">View层</strong></li>
+                    </ul>
+                </section>
+                <section class="present">
+                    <h3>前后端依旧高度耦合</h3>
+                    <ul class="pull-down">
+                        <li>前端依赖服务端<strong class="strong">开发环境</strong></li>
+                        <li>在<strong class="strong">服务端View层</strong>高度耦合</li>
+                        <li>沟通成本高</li>
+                        <li>职责不清晰</li>
+                    </ul>
+                </section>
+                <section class="present">
+                    <h3>View层谁来维护？</h3>
+                    <ul>
+                        <li class="pull-down">前端写Demo，后端套页面
+                            <ul class="fragment visible" data-fragment-index="0">
+                                <li>后端需要写<strong class="strong">HTML</strong></li>
+                                <li>前端仍然确认后端写的HTML</li>
+                            </ul>
+                        </li>
+                        <li class="pull-down">前端写View层，后端只管数据
+                            <ul class="fragment visible current-fragment" data-fragment-index="1">
+                                <li>前端需要熟悉后端语言</li>
+                                <li>前端需要了解<strong class="strong">后端架构</strong></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section class="present">
+                    <h3>无法良好的支持跨终端</h3>
+                    <ul>
+                        <li><strong class="strong">业务逻辑</strong>散落在应用中</li>
+                        <li><strong class="strong">渲染逻辑</strong>强依赖后端页面</li>
+                        <li>只能用responsive design硬来</li>
+                    </ul>
+                    <aside class="notes">
+                        跨终端更不能很好的实现，因为业务逻辑是散落的，所以只能做响应式设计硬来了。
+                    </aside>
+                </section>
+                <section class="present" style="top: -160.5px; display: block;">
+                    <h3>高度耦合的前后端分工</h3>
+                    <ul>
+                        <li><strong class="strong">沟通成本</strong>上升</li>
+                        <li><strong class="strong">维护成本</strong>上升</li>
+                        <li>无法正确且快速的<strong class="strong">响应变化</strong></li>
+                        <li class="strong fragment visible" data-fragment-index="0">代码的腐烂只是迟早的问题</li>
+                    </ul>
+                    <aside class="notes">
+                        高度耦合的分工，造成沟通成本、维护成本很高，无法快速响应变化的问题。<br>
+                        代码的腐烂只是迟早的问题<br><br>
+                        需要从混乱中建立起新的秩序。
+                    </aside>
+                </section>
+                <section class="present">
+                    <img class="w100" src="img/hunluan.jpg">
+                </section>
+
+
+                <!-- Client-side MVC时代  ////////////////////////////////////////////////////////////////////////////////////////// -->
+                <section class="present">
+                    <h2>Client-side <strong class="strong">MV*</strong> 时代</h2>
+                </section>
+                <section class="present">
+                    <img class="w100" src="img/client-side-mvc.jpg">
+                    <aside class="notes">
+                        前端开始接管所有的VIEW,中间用json来回交互。
+                    </aside>
+                </section>
+                <section>
+                    <h3>接口分离, 后端提供数据, 前端<strong class="strong">自己搞</strong></h3>
+                    <br/>
+                    <p>Model层 - JavaScript Object</p>
+                    <p>View层 - JavaScript Template</p>
+                </section>
+                <section class="present">
+                    <h3>业界的优秀方案</h3>
+                    <br>
+                    <p>AngularJS, Backbone, EmberJS, KnockoutJS, React, etc.</p>
+                </section>
+                <section class="present">
+                    <h2>前后端职责清晰了</h2>
+                    <table class="pull-down w100">
+                        <thead>
+                        <tr><th>后端</th><th>前端</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>提供数据</li>
+                                    <li>处理业务逻辑</li>
+                                    <li>Server-side MVC架构</li>
+                                    <li>代码跑在服务器上</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>接收数据，返回数据</li>
+                                    <li>处理渲染逻辑</li>
+                                    <li>Client-side MV* 架构</li>
+                                    <li>代码跑在浏览器上</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+
+
+                <!-- Client-side MVC时代  分离后存在的问题 ////////////////////////////////////////////////////////////////////////////////////////// -->
+                <section>
+                    <h3>分离干净了，分工明确了，但是...</h3>
+                </section>
+                <section class="present">
+                    <h1>The Problems</h1>
+                </section>
+                <section class="present">
+                    <h3>各层职责重叠，并且各玩各的</h3>
+                    <ul class="pull-down">
+                        <li class="fragment visible" data-fragment-index="0">Client-side Model 是 Server-side Model <strong class="strong">的加工</strong></li>
+                        <li class="fragment visible" data-fragment-index="1">Client-side View 跟 Server-side是 <strong class="strong">不同层次</strong>的东西</li>
+                        <li class="fragment visible" data-fragment-index="2">Client-side的Controller 跟 Sever-side的Controller <strong class="strong">各搞各的</strong></li>
+                        <li class="fragment visible" data-fragment-index="3">Client-side的Route 但是 Server-side <strong class="strong">可能没有</strong></li>
+                    </ul>
+                </section>
+<!--
+                <section class="present">
+                    <h3>性能问题</h3>
+                    <ul>
+                        <li>渲染，取值都在<strong class="strong">客户端</strong>进行，有性能的问题</li>
+                        <li>需要等待资源到齐才能进行，会有短暂<strong class="strong">白屏</strong>与闪动</li>
+                        <li>在移动设备<strong class="strong">低速网路</strong>的体验奇差无比</li>
+                    </ul>
+                </section>
+-->
+                <section class="present">
+                    <h3>重用问题</h3>
+                    <ul>
+                        <li><strong class="strong">模版</strong>无法重用，造成维护上的麻烦与不一致</li>
+                        <li><strong class="strong">逻辑</strong>无法重用，前端的校验后端仍须在做一次</li>
+                        <li><strong class="strong">路由</strong>无法重用，前端的路由在后端未必存在</li>
+                    </ul>
+                </section>
+                <section class="present">
+                    <h3>跨终端问题</h3>
+                    <ul>
+                        <ul>
+                            <li><strong class="strong">业务</strong>太靠前，导致不同端重复实现</li>
+                            <li><strong class="strong">逻辑</strong>太靠前，造成维护上的不易</li>
+                        </ul>
+                    </ul>
+                </section>
+                <section class="present">
+                    <h3>SEO问题</h3>
+                    <p>渲染都在客户端，模版无法重用，<strong class="strong">SEO实现</strong> 麻烦</p>
+                </section>
+                <!--Problems END-->
+
+
+                <!--解决方案-->
+                <section class="present">
+                    <h3>有点沉重啊</h3>
+                    <img src="img/chenzhong.jpg" width="350">
+                    <aside class="notes">
+                        有点沉重，有木有！
+                    </aside>
+                </section>
+                <section data-background="#007777">
+                    <h2>敢不敢有个解决方案？</h2>
+                </section>
+
+                <section class="present">
+                    <h2>因為有了<strong class="strong">NodeJS</strong></h2>
+                    <p class="fragment pull-down visible" data-fragment-index="0">我们有机会从工作职责上</p>
+                    <p class="fragment visible" data-fragment-index="1">重新定义前后端的分层</p>
+                </section>
+                <section class="present" style="top: -211.5px; display: block;">
+                    <h2>重新定义的前后端</h2>
+                    <img class="w100" src="img/work-mode-2.png">
+
+                    <aside class="notes">
+                        在前端与后端中间加一层NodeJS，会突然发现，前面的那些问题，还是很容易解的。
+                    </aside>
+                </section>
+                <section>
+                    <h2>基于<strong class="strong">NodeJS</strong>全端开发</h2>
+                </section>
+                <section>
+                    <img src="img/nodejs-fullstack.png">
+
+                    <aside class="notes">
+                        <p>
+                        Q1:为什么要增加一层NodeJS？<br><br>
+
+                        以后端MVC的模式进行开发，这种模式严重阻碍了前端开发效率，也让后端不能专注于业务开发。<br>
+                        解决方案是让前端能控制Controller层，但是如果在之前的技术体系下很难做到，因为不可能让所有前端都学java，安装后端的开发环境，写VM。<br>
+                        NodeJS就能很好的解决这个问题，我们无需学习一门新的语言，就能做到以前后端要做的事情，一切都显得那么自然。<br>
+                        </p>
+
+                        下面这个做为提问问题。
+                        <p>
+                        Q2:Node什么都能做，为什么还要JAVA？<br><br>
+
+                        我们的初衷是做前后端分离，如果考虑这个问题就有点违背我们的初衷了。<br>
+                        即使用Node替代Java，我们也没办法保证不出现今天遇到的种种问题，比如职责不清。<br>
+                        我们的目的是分层开发，专业的人，专注做专业的事。<br>
+                        基于JAVA的基础架构已经非常强大而且稳定，而且更适合做现在架构的事情。<br><br>
+
+                        另外，JAVA还有自己要做的事。
+                        <p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>淘宝基于<strong class="strong">NodeJS</strong>的前后端分离</h2>
+                </section>
+                <section>
+                    <img src="img/TB-FE-BE.jpg">
+
+                    <aside class="notes">
+                        简单解释下：<br>
+                        - 最上端是服务端，也就是后端。后端对于我们来说，就是一个接口的集合，服务端提供各种各样的接口供我们使用。<br>
+                            因为有Node层，接口是什么形式没有什么影响。对于后端开发来说，他们只用关心业务代码的接口实现。<br>
+                        - 服务端下面是Node应用。<br>
+                        - Node应用中，有一层Model Proxy与服务端进行通讯。这一层主要是抹平我们对不同接口的调用，并封装一些view层需要的Model。<br>
+                        - Node层还能轻松实现其他系统的调用需求，像CDN服务，就是图里最下面这一部分。<br><br>
+                        - Node层要使用什么框架由开发者自己决定<br>
+                        - 怎么用Node也可以自己决定，我们可以使用Node轻松实现我们想要的<br>
+                            输出方式:JSON/JSONP/RESTful/HTML/BigPipe/Comet/Socket/同步、异步，想怎么整就怎么整，完全根据你的场景决定。<br><br>
+
+                        - 浏览器层在我们这个架构中没有变化，引入Node不会改变你以前在浏览器中开发的认知。<br><br>
+                        - 引入Node，只是把本该就前端控制的部分交由前端掌控。
+                    </aside>
+                </section>
+                <section>
+                    <h2>前端的工作量是否增加了？</h2>
+                    <aside class="notes">
+                        <p>
+                        相对于只切页面/做demo，肯定是增加了一点.<br>
+                        但是在原来的模式下联调、沟通环节，这个过程非常花时间，也容易出bug，还很难维护。
+                        </p>
+                        <p>
+                        另外，测试成本可以节省很多。以前开发的接口都是针对表现层的，很难写测试用例。<br>
+                        如果做了前后端分离，甚至测试都可以分开，一拨人专门测试接口，一拨人专注测试UI（这部分工作甚至可以用工具代替）。<br>
+                        现在已经有了很多成熟的前端测试框架。
+                        </p>
+                        所以，虽然工作量会增加一点，但是总体开发效率会提升很多。
+                    </aside>
+                </section>
+
+
+
+                <section data-background="#007777">
+                    <h2>一些实践</h2>
+                    <aside class="notes">
+                        下在说一下我在做全端开发的项目实践，主要介绍前后端分离后，每一层所用到的技术方案。也就是每一层里具体怎样做的。
+                    </aside>
+                </section>
+                <section>
+                    <h3>Front-end Skills</h3>
+                    <img src="img/front-skill-tag-cloud-2.png">
+                    <aside class="notes">
+                        一个全端项目，会用到大量的前后端的Skills.<br>
+                        看一下我们在实际项目中用到了哪些？
+                    </aside>
+                </section>
+                <section>
+                    <h3>中间件定制平台</h3>
+                    <img src="img/foxydashboard.png">
+                    <aside class="notes">
+                        “中间件定制平台”是一个内部人员使用“WEB控制面板”类型的项目。
+                    </aside>
+                </section>
+                <section>
+                    <h3>“中间件定制平台”项目中用到的Skills</h3>
+                    <img src="img/foxy-skills2.png">
+                    <aside class="notes">
+                        这里先预览一下，后面会稍微展开来介绍一下。<br>
+                        前端用Angular做架构核心<br>
+                        后端使用mySql数据，用Sequelize做ORM，然后自己做了一套API系统，对应淘宝架构里的Model Proxy.<br>
+                        中间也用到了Grunt做一些构建方面的工作。
+                    </aside>
+                </section>
+
+
+<!--
+                <section>
+                    <h2>前端工程</h2>
+                    <ul>
+                        <li class="fragment">纯静态的前台工程，不依赖web server，可独立工程，独立开发</li>
+                        <li class="fragment">开发过程使用JSON file/MockJS，通过配置切换Angular Service数据源</li>
+                        <li class="fragment">使用AngularJS，构建完善的前端MVC，简单高效的实现业务逻辑</li>
+                        <li class="fragment">使用Bootstrap做UI框架，使用Angular封装过的KendoUI/jQWidgets等UI组件，实现复制交互控件</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>后端工程</h2>
+                    <ul>
+                        <li class="fragment">Sequelize实现ORM，简化数据库开发工作量</li>
+                        <li class="fragment">使用LinqJS，进一步简化ORM对象的操作</li>
+                        <li class="fragment">使用ThenJS，实现数据库的多表操作</li>
+                        <li class="fragment">自行开发的API系统（Model Proxy?）,使NodeJS后端服务化，直接向前端开放业务接口</li>
+                    </ul>
+                </section>
+-->
+                <section>
+                    <h2>前端工程</h2>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">
+                        1、纯静态的前台工程，不依赖web server，可独立工程、独立开发
+                    </div>
+                    <img src="img/static.png">
+                    <aside class="notes">
+                        在快速做界面原型或演示的时候，可以节省不少时间
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">2、开发过程使用JSON file/MockJS，通过配置切换Angular Service数据源</div>
+                    <pre><code data-trim contenteditable style="font-size:18px; margin-top: 40px;">
+                        window.__service.factory('templateRES',function($resource) {
+                        var url = framework.getFinalURL('api/template/:method/1','../template/api/:method.json');
+                        var json = $resource(url,{});
+                        return json;
+                        });
+                    </code></pre>
+                    <aside class="notes">
+                        Angular Service数据源MOCK的例子，getFinalURL中通过一个全局的配置，切换使用的API地址
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">
+                        3、使用AngularJS，构建完善的前端MVC，简单高效的实现业务逻辑
+                    </div>
+                    <img src="img/ngmvc1.png" style="float:left; margin-right:20px;" >
+                    <img src="img/ngmvc2.png" style="float:left" >
+                    <aside class="notes">
+                        AngularJS这块我就不多介绍了，后面会有各种高大上的Angular专场分享。<br>
+                        这里我只想说明一点，Angular非常适合做这种业务复杂、功能和页面多的项目，比如说我们定制平台这种专业人员使用的控制面板。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">
+                        4、使用Bootstrap做UI框架，使用Angular封装过的KendoUI/jQWidgets等UI组件，实现复制交互控件
+                        <aside class="notes">
+                            复制UI控件，要解决的核心问题是：
+                            1 UI控件要非常容易的与业务逻辑层交互，要有全面的事件支持<br>
+                            2 调用形式简单，纯HTML化是比较理想的状态<br>
+                            3 封装独立、低耦合<br>
+                        </aside>
+                    </div>
+                    <img src="img/compenet1.png">
+                </section>
+                <section>
+                    <h3>4-2、组件的封装和组织</h3>
+                    <img src="img/compenet2.png" style="width:300px;">
+                    <img src="img/LAB.png">
+                    <aside class="notes">
+                        用Angular对组件做再封装<br/>
+                        在Angular封装内部，使用LABjs调用UI组件的相关资源<br>
+                        调用组件时，只要引用一个JS文件即可
+                    </aside>
+                </section>
+                <section>
+                    <h3>4-3、组件的HTML化使用</h3>
+                    <img src="img/compenet3.png">
+                    <aside class="notes">
+                        干净的HTML看起来让人心情会好很多。<br>
+                        我比较喜欢Angular这种HTML扩展的模式，在HTML层面上，将要做的事情都描述清楚，这本来就应该是VIEW层应该做的事。
+                    </aside>
+                </section>
+                <section>
+                    <h3>4-4、组件的MVC化控制</h3>
+                    <img src="img/MVCcontro.png">
+                    <aside class="notes">
+                        在业务逻辑层，定义控件的增删改查事件处理相应的操作，每个事件之间完全是独立的，代码非常整洁。
+                    </aside>
+                </section>
+
+
+
+                <section>
+                    <h2>后端工程</h2>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">1、Sequelize实现ORM，简化数据库开发工作量</div>
+<pre><code data-trim contenteditable style="font-size:18px; margin-top: 40px;">
+module.exports = function (sequelize, DataTypes) {
+    var WebSite = sequelize.define('Website', {
+        name: DataTypes.STRING,
+        status: DataTypes.INTEGER
+    }, {
+        tableName: 'bf_website',
+        timestamps: false
+    });
+    return WebSite;
+}
+</code></pre>
+                    <aside class="notes">
+                        定义一个数据库对象，以及这个对象的类型结构，这个对象与哪个数据库表关联。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">1-2、Sequelize的Models</div>
+<pre><code data-trim contenteditable style="font-size:18px; margin-top: 40px;">
+function Website(_) {
+    _ = _ || {};
+    this.id = _.id || 0;
+    this.status = _.status || 0;
+    this.name = _.name || '';
+}
+Website.findById = function (callback) {
+    Website.find({ where: {'id': this.id } } ).complete(function (err, obj) {
+        callback(err, obj);
+    });
+};
+Website.prototype.save = function(callback) {
+    Website.create(this).complete(function (err, obj) {
+        callback(err, obj);
+    });
+};
+module.exports = Website;
+</code></pre>
+                    <aside class="notes">
+                        定义一个数据库模型，里面就是对这个数据库模型的一些操作方法
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">2、使用LinqJS，进一步简化ORM对象的操作</div>
+<pre><code data-trim contenteditable style="font-size:18px; margin-top: 40px;">
+var Enumerable = require('linq');
+var xpath = Enumerable.from(xpathArr)
+.select(function(xpath){
+    if(xpath.name == inputs.xpath.name){
+        xpath = 'new value';
+    }
+    return xpath;
+}).toArray();
+</code></pre>
+                    <aside class="notes">
+                        Linq是.NET里的一种技术，现在Java里也有类似的实现。<br>
+                        Linq的功能是可以用数据库查询的方式查询数据集合，在JS里主要用来查询JSON数组。<br><br>
+
+                        Sequelize是面向数据库层的操作，而Linq可以说是面向业务层的，在业务层中从数据库里取出数据集合，然后再进次二次查询和处理 非常方便。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">3、使用ThenJS，直观管理数据库的多表操作</div>
+<pre><code data-trim contenteditable style="font-size:18px; margin-top: 40px;">
+then(function(defer){
+    WebsiteDomain.del(inputs.ids , defer);
+})
+.then(function(defer, value){
+    Xpath.delByDomainId(inputs.ids, defer);
+})
+.all(function (defer, err) {
+    if(!err){
+        callback(null, {
+            code: '00',message: 'success.'
+        });
+    }
+}).
+fail(function (defer, err) {
+    callback(null, {
+        code: '01',message: err
+    });
+});
+</code></pre>
+                    <aside class="notes">
+                        由于NodeJS是异步的，如果你要做一个删除两个关联表的数据，在成功以后，返回操作信息的操作。<br>
+                        你必须是在前一个删除操作的回调里去做另一个表的删除。如果是多个表的操作就会面临回调嵌套的问题<br>
+                        我这里是用ThenJS，一个国人开发的非常优秀的异步框架来实现回调的链式调用，这样代表看起来优雅了很多，有木有!<br>
+
+                        我这里只是举了一个数据库操作的例子，实际上ThenJS适合用在一切用到回调的地方。<br>
+                        另外，sequelize也支持数据库事务，使用起来也非常简单的。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">
+                        4、自行开发的API系统（Model Proxy?）,使NodeJS后端服务化，直接向前端开放业务接口
+                    </div>
+                    <img src="img/API.png">
+
+                    <aside class="notes">
+                        这个API系统对应了淘宝的NodeJS架构里的Model Proxy，在我们的实际项目中，目前主要用来开放数据库的基本操作和一些中间件服务器的服务调用。<br>
+                        将来可能随着需求的增加，可能会二次封装更多的API。<br>
+                        就像前面讲的API的封装是由前端自己控制的，所以完全可以按自己想要的形式去实现，这比JS直接去调一些API调试会幸福很多。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.4em; font-weight:bold; line-height:1.2em; text-align:left;">
+                        4-2、API的调用
+                    </div>
+                    <img src="img/API2.png">
+                    <aside class="notes">
+                        写好API的实现文件后，自动生成URL访问地址<br>
+                        API返回JSON格式的数据<br>
+                        这个部分，是利用NodeJS的Express框架做了自动扫描和动态路由的操作。
+                    </aside>
+                </section>
+                <section>
+                    <h3>实践中的全端开发技术家族</h3>
+                    <img src="img/tuopu.jpg">
+                    <aside class="notes">
+                    中间定制平台项目实践用到的架构，基本上就是这样<br>
+                    数据库是MySql，然后用Sequelize做ORM映射，在API系统中用到ThenJS、LinqJS在中间步骤也就是业务逻辑中去解决对象集合以及异步的问题<br>
+                    API系统一方面提供数据库业务接口，另一方面，封装中间件的服务，提供给前端使用，还记得Model Proxy吗？
+
+                    <br><br>
+                    LESS部分，目前我们只是用到它去提升写CSS的效率；之前参加一些圈内活动，腾讯那边分享LESS的使用，已经用到了非常深入的程度，比如函数、接口、继承等，我们还没有用到这么深入<br>
+                    AngularJS是整个前端的核心，用它来与后端进行API通讯，封装组件，业务逻辑控制等<br>
+                    jQuery与Bootstrap做UI的架构,因为这些框架很成熟，有非常丰富的UI资源可以用<br>
+                    LAB是一个非常轻量的文件加载器，配合Angular，
+
+                    <br><br>
+
+                    前后端交互的部分，是将后端API系统与前端的Angular通过NodeJS的Express架构连接起来。<br>
+                    另外，也会用到Grunt之类的构建工具，去做一些工程预处理方面的工作，像模板包含、文件合并、LESS/coffee编译等
+                    <br><br>
+                    目前，我就是在用这样一套架构的东西，一个在做一套系统，我个人觉得非常HAPPY，因为系统虽然复杂，但在做每一个一节、每一层的时候，非常清晰。<br>
+                    出现错误时，可以非常快速的定位问题；有业务需求时，非常迅速的就可以实现。<br><br>
+                    所以，利益于NodeJS平台以及这套架构的系统，我才能在做这个业务平台之外，有时间去整理专利文档、沟通业务需求和产品方向、甚至是搞今天这个分享。
+                    </aside>
+                </section>
+
+
+                <section data-background="#007777">
+                    <h2>总结一下</h2>
+                </section>
+                <section>
+                    <h3 style="text-align:left;line-height:1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 全端工程师，就是掌握多种技能，并能利用多种技能独立高效的完成产品的人。</h3>
+                    <aside class="notes">因为需要比任何一个岗位都关注技术和代码的分离、解耦，我们需要在从后端到前端的每一个环节上找到一个好的解决方案，
+                        从而提高工作效率和质量，这样才能从繁复的全端工作中解脱出来，去关注产品的本质以及产品背后的商业目标。<br/><br/>
+
+                        到那个时候，你将不再是一个苦逼的程序员了！！<br/>
+                        那是什么？可能成为了一个苦逼的产品经理，呵呵。
+                    </aside>
+                </section>
+                <section>
+                    <div style="font-size:1.5em; line-height:1em;">Design and building a team or a company which builds great products.</div>
+                    <aside class="notes">
+                        我用这句话来结尾：<br>
+                        全端工程师,更重要的责任：设计和打造一个团队或公司，去创造伟大的产品。<br>
+                        我知道，每个全端工程师，其实都有一个产品梦，对不对？！
+                    </aside>
+                </section>
+
+
+				<section data-background="#8c4738">
+					<h1>THE END</h1>
+                    <h2>Q & A</h2>
+                    <aside class="notes">
+                        我的分享就是这些，谢谢大家。<br><br>
+
+                        问题一：为什么不用SeaJS、RequierJS之类的模块化框架？
+                        AngularJS，提供了controller、direcitive、service等方法，本身的模块化已经做得非常好了。<br>
+                        而LAB是一个非常轻量的文件加载器，所以不需要用到像SeaJS、RequierJS这样的模块化框架，只需要简单的做加载就可以了，所以它非常适合。
+                        <br><br>
+
+                        问题二：在全端开发的架构中，有了NodeJS为什么还需要用到Java？<br><br>
+                        我们的初衷是做前后端分离，如果考虑这个问题就有点违背我们的初衷了。<br>
+                        即使用Node替代Java，我们也没办法保证不出现今天遇到的种种问题，比如职责不清。<br>
+                        我们的目的是分层开发，专业的人，专注做专业的事。<br>
+                        基于JAVA的基础架构已经非常强大而且稳定，而且更适合做现在架构的事情。<br><br>
+
+                        另外，JAVA还有自己要做的事。
+                    </aside>
+				</section>
+<!-- THEN END////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

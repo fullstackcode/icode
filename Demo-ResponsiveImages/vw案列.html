@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Responsive Image Picture</title>
+</head>
+<body>
+	<style>
+	*{padding:0;margin:0;}
+	  picture{display: block;width: 100%;text-align: center;}
+	</style>
+	
+	<p>sizes=60vw</p>
+	<picture>
+	  <source sizes="60vw"
+	          srcset="image/kitten-large.png 650w,
+	               image/kitten-medium.png 465w,
+	               image/kitten-small.png 330w">
+	  <img src="kitten-small.png" alt="lighthouse"
+	       sizes="80vw"
+	       srcset="image/kitten-large.png 650w,
+	               image/kitten-medium.png 465w,
+	               image/kitten-small.png 330w">
+	</picture>
+	<p>sizes=100vw</p>
+	<picture>
+	  <source sizes="100vw"
+	          srcset="image/kitten-large.png 650w,
+	               image/kitten-medium.png 465w,
+	               image/kitten-small.png 330w">
+	  <img src="kitten-small.png" alt="lighthouse"
+	       sizes="100vw"
+	       srcset="image/kitten-large.png 650w,
+	               image/kitten-medium.png 465w,
+	               image/kitten-small.png 330w">
+	</picture>
+
+</body>
+</html>

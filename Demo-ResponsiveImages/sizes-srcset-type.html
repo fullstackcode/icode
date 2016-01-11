@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sizes dpi mime</title>
+	<style>
+	body{text-align: center;margin: 0;padding: 0;}
+	picture{display: block;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		sizes="(min-width: 640px) 60vw, 100vw"
+		srcset="image/200.webp 200w,
+				image/400.webp 400w,
+				image/800.webp 800w,
+				image/1200.webp 1200w"
+		type="image/webp">
+	<img
+		src="image/400.png" alt="The Oslo Opera House"
+		sizes="(min-width: 640px) 60vw, 100vw"
+		srcset="image/200.png 200w,
+				image/400.png 400w,
+				image/800.png 800w,
+				image/1200.png 1200w">
+</picture>
+<h3>浏览器宽度大于等于640px的时候，图片宽度为视窗宽度的百分之六十;小于639px的时候，图片宽度为视窗宽度的百分之百。支持webp的浏览器显示webp图片，其他显示png图片。</h3>
+</body>
+</html>

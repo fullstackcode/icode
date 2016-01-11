@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>mime art</title>
+	<style>
+	picture{display: block;text-align: center;width: 100%;}
+	h3{text-align: center;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		media="(min-width:1024px)"
+		srcset="image/kitten-large.webp"
+		type="image/webp">
+	<source
+		media="(min-width:1024px)"
+		srcset="image/kitten-large.png">
+	<source
+		srcset="image/kitten-small.webp"
+		type="image/webp">
+	<img src="image/kitten-small.png" alt="小于1024时，显示kitten-small">
+</picture>
+
+
+<h3>窗口大于等于1024的时候，显示kitten-large，小于1024的时候，显示kitten-small。支持webp格式的会显示webp图片，不支持的显示jpg图片</h3>
+</body>
+</html>

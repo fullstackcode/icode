@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Responsive Image Picture</title>
+</head>
+<body>
+	<style>
+	  picture{display: block;width: 100%;text-align: center;}
+	  body::before{display:block;margin:20px;font-size: 20px;}
+	  @media screen and (min-width: 465px){
+	  	body::before{content: "当视窗大于等于465小于等于650时，显示中图：";color:blue;}
+	  }
+	  @media screen and (min-width: 650px){
+	  	body::before{content: "当视窗大于等于650时，显示大图：";color:red;}
+	  }
+	  @media screen and (max-width: 464px){
+	  	body::before{content: "当视窗小于等于464时，显示小图：";color:green;}
+	  }
+	</style>
+	<picture>
+	  <source media="(min-width: 650px)" srcset="image/kitten-large.png">
+	  <source media="(min-width: 465px)" srcset="image/kitten-medium.png">
+	  <img  src="image/kitten-small.png" alt="a cute kitten">
+	</picture>
+</body>
+</html>

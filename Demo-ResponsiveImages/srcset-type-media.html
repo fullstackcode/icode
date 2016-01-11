@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dpi mime art</title>
+	<style>
+	body{text-align: center;}
+	picture{display: block;width:100%;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		media="(min-width:1024px)"
+		srcset="image/kitten-medium.webp  1x,
+				image/kitten-large.webp 2x"
+		type="image/webp">
+	<source
+		media="(min-width:1024px)"
+		srcset="image/kitten-medium.png 1x,
+				image/kitten-large.png 2x">
+	<source
+		srcset="image/kitten-small.webp 1x,
+				image/kitten-medium.webp 2x"
+		type="image/webp">
+	<img src="image/kitten-small.png" alt=""
+		 srcset="image/kitten-medium.png 2x">
+</picture>
+
+<h3>窗口大于等于1024的时候，显示kitten-medium，小于1024的时候，显示kitten-small。高分辨率的浏览器显示高分辨率的图片，其他浏览器显示普通的图片。另外，支持webp格式的会显示webp图片，不支持的显示jpg图片</h3>
+</body>
+</html>

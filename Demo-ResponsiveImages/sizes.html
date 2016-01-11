@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sizes</title>
+	<style>
+	body{text-align: center;margin: 0;padding: 0;}
+	</style>
+</head>
+<body>
+<picture>
+	<source
+		sizes="(min-width:640px) 60vm,100vm" 
+		srcset="
+			 image/kitten-small.png 330w,
+ 	 		 image/kitten-medium.png 465w,
+ 	         image/kitten-large.png 650w">
+ 	<img src="image/kitten-medium.png" alt=""
+	 sizes="(min-width:640px) 60vm,100vm"
+ 	 srcset="image/kitten-small.png 330w,
+ 	 		 image/kitten-medium.png 465w,
+ 	         image/kitten-large.png 650w">
+</picture>
+
+<img src="image/kitten-medium.png" alt=""
+	 sizes="(min-width:640px) 60vm,100vm"
+ 	 srcset="image/kitten-small.png 330w,
+ 	 		 image/kitten-medium.png 465w,
+ 	         image/kitten-large.png 650w">
+<h3>浏览器宽度大于等于640px的时候，图片宽度为视窗宽度的百分之六十，小于640px的时候，图片宽度为视窗宽度的百分之百。浏览器根据屏幕DPI和图片宽度选择合适的图片。</h3>
+</body>
+</html>

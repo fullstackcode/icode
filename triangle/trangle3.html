@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>trangle</title>
+	<style type="text/css">
+		body,ul,li{margin: 0; padding: 0}
+		ul{margin: 100px;list-style: none}
+		a{font-size: 18px; color;#3c3c3c;text-decoration: none;float: left;height: 35px;line-height: 35px}
+		ul li {width: 150px;height: 35px;line-height: 35px}
+		ul li i{display: block;float:left;height: 5px; width: 10px; margin:15px 0;position: relative;}
+		em,span{width: 0;height: 0;
+			border-style:solid dashed dashed dashed;
+			border-width: 5px;
+			border-color:transparent;
+			position: absolute;
+			top:0;
+			left:0;
+		}
+		em{
+			border-top-color: #6c6c6c;top:1px;
+			border-bottom: none;
+			
+		}
+		span{
+			border-top-color:#fff;
+			border-bottom: none
+		}
+		ul li:hover i{transform:rotate(180deg);transition:all ease 1ms;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li><a href="">我的订单</a>
+			<i>
+				<em></em>
+				<span></span>
+			</i>
+		</li>	
+	</ul>
+	
+</body>
+</html>

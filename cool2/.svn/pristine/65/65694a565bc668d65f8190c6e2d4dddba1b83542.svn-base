@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+	<title>微信场景应用</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640,user-scalable=no,target-densityDpi=device-dpi">
+	<meta content="yes" name="apple-mobile-web-app-capable" /> 
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" /> 
+	<meta content="telephone=no" name="format-detection" /> 
+	<!-- 样式引入 -->
+	<link rel="stylesheet" href="vendor/css/base.css">
+	<link rel="stylesheet" href="vendor/css/index.css">
+	<!-- JS文件引入 -->
+	<script src="vendor/js/jquery.min.js"></script>
+	<script src="vendor/js/index.js"></script>
+</head>
+<body>
+	<ul class="list">
+		<li class="current"></li>
+		<li ></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+</body>
+</html>
